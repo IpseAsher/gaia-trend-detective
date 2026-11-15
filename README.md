@@ -1,41 +1,32 @@
 # GAIA — Earth System Trend Detective
 
-GAIA is a planned scientific web application for exploring regional precipitation trends by month, season, and year. It investigates where rainfall is changing, how quickly, and with what statistical evidence, using annual totals to put seasonal changes in context.
+GAIA is a scientific web application in planning that explores how precipitation changes across regions, months, and seasons. It brings together a regional map, time series, and statistical evidence to help people investigate changes in rainfall.
 
-**Research question:** In which regions and seasons is surface precipitation changing, at what rate, and with what statistical evidence? How does the picture change when examining annual totals?
+**Research question:** Where and when is precipitation changing, at what rate, and with what statistical evidence?
 
-## Current status
+## Purpose
 
-The repository contains product, architecture, and planning documentation, along with initial configuration files. The project is validating its scope and data. There is no frontend, backend, dataset, or runnable application yet.
+Annual rainfall totals can hide changes within individual months or seasons. Regional averages can also hide differences between locations. GAIA aims to make those patterns easier to examine and to show the observations and uncertainty behind each estimated trend.
 
-Installation, development, build, and run commands are not available at this stage. They will be documented when the corresponding manifests and scripts exist.
+## Planned experience
+
+1. Choose a time period and a month, season, or full year.
+2. Explore a map showing the estimated precipitation trend for each region.
+3. Select a region to inspect its rainfall history, rate of change in millimeters per decade, uncertainty, and statistical evidence.
+4. Examine the second region under the same settings and use annual totals to put seasonal changes in context.
+
+Results will include data provenance and distinguish insufficient data from an estimated trend with inconclusive evidence.
 
 ## MVP scope
 
 - Two predefined regions, selected after validating data coverage.
 - A fixed, versioned monthly precipitation dataset bundled with the application.
-- Selection of a time period and aggregation by month, season, or year.
-- A regional map, time series, and trend results with units, uncertainty, and provenance.
+- Monthly, seasonal, and annual analysis over a selected time period.
+- A regional map and time series with trend estimates and supporting statistical evidence.
 - Local execution and access without accounts. The installed application must work without an external network connection.
-- Read-only SQLite access at runtime, with data preparation performed separately.
-- Docker as a future packaging option.
 
 The data source and regions still need validation. A 3D globe, global coverage, file uploads, and user-drawn regions are outside the MVP scope.
 
-## Planned development
+## Current status
 
-The architecture defines a frontend using React Router in Framework Mode with SPA Mode, React, TypeScript, and Vite, and a FastAPI backend that serves the compiled interface and API. Scientific calculations will run in the backend.
-
-The frontend must be initialized with **pnpm** within this project root, without creating an additional enclosing project directory. Once its `package.json` exists, pin an exact, compatible pnpm version in `packageManager`, use pnpm to install dependencies and run scripts, and keep `pnpm-lock.yaml` in Git.
-
-The local `.env` file is excluded from Git. It currently contains only a comment because the application does not read any environment variables yet.
-
-## Documentation
-
-- [Requirements and acceptance criteria](docs/GAIA_requerimientos.md).
-- [Architecture, HTTP contracts, and statistical rules](docs/ARCHITECTURE.md).
-- [Phases and priorities](docs/ROADMAP.md).
-- [Planning conventions](PLANS.md).
-- [Working instructions](AGENTS.md).
-
-The requirements and roadmap retain proposals and decisions awaiting validation; the architecture records the MVP's technical decisions. This initial setup prepares the repository for that work.
+GAIA is validating its scope and data. The features above describe the planned MVP; a runnable application is not available yet.
