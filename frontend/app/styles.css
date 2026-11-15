@@ -1,0 +1,76 @@
+:root {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #203f36;
+  background: #f8f8f2;
+  font-synthesis: none;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, a { -webkit-tap-highlight-color: transparent; }
+a { color: inherit; }
+button { font: inherit; }
+h1, h2, h3, p { margin: 0; overflow-wrap: anywhere; }
+h1, h2, h3 { line-height: 1.18; text-wrap: balance; }
+p { text-wrap: pretty; }
+
+:focus-visible {
+  outline: 3px solid #875616;
+  outline-offset: 5px;
+}
+
+main:focus, #about:focus { outline-offset: 8px; }
+.page-shell { max-width: 1200px; margin-inline: auto; padding: 0 48px; }
+.site-header { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 32px 0; border-bottom: 1px solid #d4dcd2; }
+.wordmark { font-size: 2.2rem; line-height: 1; font-weight: 800; letter-spacing: -.08em; }
+.wordmark span { color: #50725a; }
+.brand-description { margin-top: 8px; font-size: .8rem; color: #526457; }
+.text-link { display: inline-flex; align-items: center; min-height: 44px; text-underline-offset: 5px; font-size: .9rem; font-weight: 600; }
+.skip-link { position: absolute; z-index: 10; top: 12px; left: 12px; padding: 10px 18px; background: #203f36; color: white; transform: translateY(-160%); }
+.skip-link:focus { transform: translateY(0); }
+.intro-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 64px; align-items: center; padding: 88px 0; }
+.eyebrow { font-size: .75rem; letter-spacing: .15em; text-transform: uppercase; font-weight: 700; color: #526457; }
+h1 { font-size: clamp(2.5rem, 4.5vw, 3.7rem); font-weight: 600; letter-spacing: -.055em; margin-top: 22px; }
+.intro-copy { font-size: 1.1rem; color: #526457; margin-top: 24px; max-width: 43ch; }
+.scope-note { border-left: 2px solid #6b8069; padding-left: 16px; margin-top: 32px; font-size: .9rem; }
+.availability { padding: 32px; background: #eaf0e5; border: 1px solid #a9b6a3; border-radius: 12px; }
+.card-heading { display: flex; align-items: center; gap: 12px; }
+.rain-icon { width: 32px; height: 32px; flex: 0 0 32px; }
+.card-heading h2 { font-size: 1rem; font-weight: 600; }
+.status-copy { margin-top: 32px; }
+.status-label { color: #526457; font-size: .8rem; font-weight: 600; }
+.status-copy h3 { font-size: 1.55rem; font-weight: 600; margin-top: 12px; letter-spacing: -.025em; }
+.status-copy > p:last-child { margin-top: 16px; color: #526457; }
+button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 10px 22px; margin-top: 28px; color: #fff; background: #203f36; border: 2px solid #203f36; border-radius: 6px; font-weight: 600; cursor: pointer; }
+button:hover { background: #315447; }
+button[aria-disabled="true"] { cursor: wait; }
+.card-note { font-size: .75rem; color: #526457; margin-top: 16px; }
+.about { border-top: 1px solid #d4dcd2; padding: 40px 0 48px; scroll-margin-top: 24px; }
+.about h2 { font-size: 1.85rem; font-weight: 600; letter-spacing: -.035em; margin-top: 12px; }
+.about > p:last-of-type { max-width: 65ch; margin-top: 16px; color: #526457; }
+.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 32px; }
+.feature-grid article { padding-left: 16px; border-left: 2px solid #a9b6a3; }
+.feature-grid h3 { font-size: 1rem; font-weight: 650; }
+.feature-grid p { font-size: .9rem; color: #526457; margin-top: 10px; }
+footer { border-top: 1px solid #d4dcd2; color: #526457; font-size: .8rem; padding: 24px 0; }
+.loading-screen { padding-block: 80px; }
+.loading-screen p, .loading-screen a { margin-top: 24px; }
+
+@media (max-width: 850px) {
+  .page-shell { padding-inline: 24px; }
+  .intro-grid { grid-template-columns: 1fr; gap: 40px; padding-block: 48px; }
+  .introduction { max-width: 580px; }
+  .availability { max-width: 580px; }
+  .feature-grid { grid-template-columns: 1fr; gap: 24px; }
+  .desktop-break { display: none; }
+}
+
+@media (max-width: 400px) {
+  .page-shell { padding-inline: 20px; }
+  .site-header { align-items: flex-start; flex-direction: column; gap: 12px; padding-block: 24px; }
+  .availability { padding: 24px; }
+  h1 { font-size: 2.5rem; }
+}

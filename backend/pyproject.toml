@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gaia-backend"
+version = "0.1.0"
+description = "GAIA local API and scientific application backend"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi==0.163.0",
+    "uvicorn==0.54.0",
+]
+
+[project.optional-dependencies]
+dev = ["httpx2==2.16.0", "pytest==9.2.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -53,3 +53,4 @@ Thumbs.db
 /plans/
 /docs/adr/
 /docs/
+/.playwright-mcp
