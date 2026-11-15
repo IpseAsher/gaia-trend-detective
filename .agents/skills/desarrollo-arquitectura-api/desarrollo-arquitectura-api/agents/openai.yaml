@@ -1,0 +1,14 @@
+interface:
+  display_name: Desarrollo y arquitectura de APIs
+  short_description: Diseña, implementa y revisa APIs con HTTP y OpenAPI
+  default_prompt: Usa $desarrollo-arquitectura-api para revisar este contrato OpenAPI
+    y detectar cambios incompatibles.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

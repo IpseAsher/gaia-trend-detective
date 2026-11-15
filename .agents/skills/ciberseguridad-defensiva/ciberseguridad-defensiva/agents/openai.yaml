@@ -1,0 +1,14 @@
+interface:
+  display_name: Ciberseguridad defensiva
+  short_description: Revisa código, configuración y dependencias
+  default_prompt: Usa $ciberseguridad-defensiva para revisar este repositorio y priorizar
+    los riesgos con evidencia.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

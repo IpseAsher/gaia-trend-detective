@@ -1,0 +1,55 @@
+# Local configuration
+.env
+.env.*
+!.env.example
+
+# Dependencies and local pnpm store
+node_modules/
+.pnpm-store/
+
+# Build outputs, coverage, and caches
+dist/
+build/
+coverage/
+.cache/
+.vite/
+.react-router/
+*.tsbuildinfo
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+*.egg-info/
+.eggs/
+
+# Python virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Temporary and system files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+*.log
+.DS_Store
+Thumbs.db
+
+# Keep the pnpm lockfile when generated
+!pnpm-lock.yaml
+
+# documentation for codex
+/AGENTS.md
+/PLANS.md
+/docs/GAIA_requerimientos.md
+/docs/ARCHITECTURE.md
+/docs/ROADMAP.md
+/plans/
+/docs/adr/
+/docs/

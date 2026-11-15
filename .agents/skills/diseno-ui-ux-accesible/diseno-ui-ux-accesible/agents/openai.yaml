@@ -1,0 +1,14 @@
+interface:
+  display_name: Diseño UI/UX accesible
+  short_description: Diseña y revisa interfaces web con WCAG 2.2 AA
+  default_prompt: Usa $diseno-ui-ux-accesible para revisar este flujo de principio
+    a fin y priorizar mejoras.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
