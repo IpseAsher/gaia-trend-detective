@@ -29,9 +29,9 @@ The validated dataset uses NASA GES DISC IMERG V07B precipitation and INEGI Marc
 
 ## Current status
 
-The dataset and regional analysis API are implemented and verified against independent reference calculations. Analyses are available through the interactive API documentation linked below.
+The dataset and regional analysis API are implemented and verified against independent reference calculations. The exploration view displays real precipitation series, trend estimates, confidence intervals, statistical evidence, and annual context, with filters for region, period, and aggregation.
 
-The web interface currently displays service and dataset availability. Interactive regional maps and time-series charts are the next development phase.
+The regional map is planned for a later phase.
 
 ## Running GAIA locally
 
@@ -85,6 +85,8 @@ In a second terminal, start the frontend:
 pnpm --dir frontend dev
 ```
 
-Open [GAIA](http://127.0.0.1:5173) to view the current service status. To run an analysis, open the [interactive API documentation](http://127.0.0.1:8000/docs), expand `GET /api/v1/analyses`, and select **Try it out**. Use region ID `09` for Ciudad de México, `15` for Estado de México, or both. Set the period within 2001–2024 and choose `annual`, `month:01` through `month:12`, or `season:DJF`, `season:MAM`, `season:JJA`, or `season:SON`.
+Open [GAIA](http://127.0.0.1:5173) and select **Explore regional trends**, or open the [regional explorer](http://127.0.0.1:5173/explore) directly. The default view compares DJF precipitation for Ciudad de México and Estado de México over 2001–2024. Choose regions, years, and a month, season, or annual total, then select **Update analysis**. The chart shows the observed series; the results table includes trend estimates, confidence intervals, evidence, and independently evaluated annual context.
+
+The [interactive API documentation](http://127.0.0.1:8000/docs) is also available for direct queries to `GET /api/v1/analyses`.
 
 Keep both terminals running while using GAIA. Stop each service with `Ctrl+C` in its terminal.
