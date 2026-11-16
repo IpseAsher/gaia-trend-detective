@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 import { checkHealth, type HealthResult } from "../api/health";
 
@@ -15,7 +16,7 @@ function statusContent(state: HealthState) {
     case "offline":
       return { title: "Unable to connect", description: "GAIA could not check the data right now. Please try again in a moment." };
     case "ready":
-      return { title: "Dataset verified", description: `Dataset ${state.datasetVersion} is available. Regional exploration is coming in a future version.` };
+      return { title: "Dataset verified", description: "Precipitation records for Ciudad de México and Estado de México are ready to explore." };
   }
 }
 
@@ -52,7 +53,8 @@ export default function Home() {
           <p className="wordmark">GAIA<span aria-hidden="true">.</span></p>
           <p className="brand-description">Earth System Trend Detective</p>
         </div>
-        <nav aria-label="Main navigation">
+        <nav className="site-nav" aria-label="Main navigation">
+          <Link className="text-link" to="/explore">Explore rainfall</Link>
           <a className="text-link" href="#about">About GAIA</a>
         </nav>
       </header>
@@ -64,6 +66,7 @@ export default function Home() {
             <h1 id="page-title">Understand how<br className="desktop-break" /> rainfall is changing.</h1>
             <p className="intro-copy">Look beyond the annual total. Investigate changes across months, seasons, and regions, with the evidence behind each trend.</p>
             <p className="scope-note">Two regions. One shared question.<br />Where and when is the rain changing?</p>
+            <Link className="primary-link" to="/explore">Explore regional trends <span aria-hidden="true">↗</span></Link>
           </section>
 
           <section className="availability" aria-labelledby="availability-heading">
