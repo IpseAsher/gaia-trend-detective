@@ -6,12 +6,18 @@ import pytest
 from fastapi.testclient import TestClient
 
 from gaia.application.health import DatasetIncompatible
+from gaia.infrastructure.dataset import SQLiteDatasetRepository
 from gaia.main import create_app
 from gaia.presentation.api import logger
 
 
-def test_unprovisioned_dataset_is_unavailable():
-    with TestClient(create_app()) as client:
+@pytest.fixture
+def unavailable_app(tmp_path):
+    return create_app(SQLiteDatasetRepository(tmp_path / "gaia.sqlite", tmp_path / "manifest.json"))
+
+
+def test_unprovisioned_dataset_is_unavailable(unavailable_app):
+    with TestClient(unavailable_app) as client:
         response = client.get("/api/v1/health")
     assert response.status_code == 503
     assert response.headers["content-type"] == "application/json"
@@ -65,12 +71,12 @@ def test_unexpected_failure_is_json_without_internal_details():
     assert "private filesystem detail" not in response.text
 
 
-def test_request_log_excludes_query_values_and_headers():
+def test_request_log_excludes_query_values_and_headers(unavailable_app):
     output = io.StringIO()
     handler = logging.StreamHandler(output)
     logger.addHandler(handler)
     try:
-        with TestClient(create_app()) as client:
+        with TestClient(unavailable_app) as client:
             client.get("/api/v1/health?private=do-not-log", headers={"X-Test": "secret-value"})
     finally:
         logger.removeHandler(handler)

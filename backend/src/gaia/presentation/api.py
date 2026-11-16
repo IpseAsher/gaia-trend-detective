@@ -1,17 +1,22 @@
 import json
+from dataclasses import asdict
+import hashlib
 import logging
+import re
 import sys
 from datetime import datetime, timezone
 from time import perf_counter
-from typing import Literal
+from typing import Annotated, Literal
 
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Query, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from starlette.exceptions import HTTPException
 
 from gaia.application.health import CheckHealth, DatasetUnavailable
+from gaia.application.analyses import AnalysisInputError, AnalysesResponse, AnalyzeRegions, UnknownRegion
+from gaia.domain.analysis import AGGREGATIONS
 
 logger = logging.getLogger("gaia.http")
 if not logger.handlers:
@@ -37,6 +42,24 @@ class HealthResponse(BaseModel):
     sqlite_read_only: Literal[True]
 
 
+class AnalysesParameters(BaseModel):
+    model_config = {"extra": "forbid"}
+
+    region_id: list[Annotated[str, Field(min_length=1, max_length=64)]] = Field(
+        min_length=1, max_length=2, description="One or two distinct dataset region IDs")
+    start_year: int = Field(ge=1, le=9999)
+    end_year: int = Field(ge=1, le=9999)
+    aggregation: str = Field(json_schema_extra={"enum": list(AGGREGATIONS)})
+
+
+def etag_matches(condition: str, etag: str) -> bool:
+    if condition.strip() == "*":
+        return True
+    # GET If-None-Match uses weak comparison; opaque tags may contain commas.
+    tags = re.findall(r'(?:W/)?"[\x21\x23-\x7e\x80-\xff]*"', condition)
+    return any(tag.removeprefix("W/") == etag for tag in tags)
+
+
 def error_response(
     request: Request,
     status: int,
@@ -52,7 +75,7 @@ def error_response(
     )
 
 
-def create_api(check_health: CheckHealth) -> FastAPI:
+def create_api(check_health: CheckHealth, analyze_regions: AnalyzeRegions) -> FastAPI:
     app = FastAPI(
         title="GAIA API",
         version="0.1.0",
@@ -99,6 +122,10 @@ def create_api(check_health: CheckHealth) -> FastAPI:
     async def validation_error(request: Request, exc: RequestValidationError):
         return error_response(request, 422, "invalid_request", "Invalid request parameters.")
 
+    @app.exception_handler(AnalysisInputError)
+    async def analysis_input_error(request: Request, exc: AnalysisInputError):
+        return error_response(request, 404 if isinstance(exc, UnknownRegion) else 422, exc.code, exc.message)
+
     @app.get(
         "/api/v1/health",
         response_model=HealthResponse,
@@ -112,5 +139,28 @@ def create_api(check_health: CheckHealth) -> FastAPI:
         return HealthResponse(
             status="ok", dataset_version=dataset.dataset_version, sqlite_read_only=True
         )
+
+    @app.get(
+        "/api/v1/analyses",
+        response_model=AnalysesResponse,
+        responses={304: {"description": "Representation unchanged; no response body"},
+                   404: {"model": ErrorResponse, "description": "Unknown region"},
+                   422: {"model": ErrorResponse, "description": "Invalid query or analysis period"},
+                   503: {"model": ErrorResponse, "description": "Dataset unavailable or incompatible"}},
+        summary="Analyze precipitation and its annual context using the fixed Sen/MK method",
+    )
+    def analyses(request: Request, parameters: Annotated[AnalysesParameters, Query()]):
+        if any(len(request.query_params.getlist(key)) != 1 for key in ("start_year", "end_year", "aggregation")):
+            raise AnalysisInputError
+        result = analyze_regions.execute(tuple(parameters.region_id), parameters.start_year,
+                                         parameters.end_year, parameters.aggregation)
+        request.state.dataset_version = result.dataset.dataset_version
+        content = json.dumps(asdict(result), sort_keys=True, ensure_ascii=False,
+                             separators=(",", ":"), allow_nan=False).encode("utf-8")
+        etag = '"' + hashlib.sha256(content).hexdigest() + '"'
+        headers = {"ETag": etag, "Cache-Control": "private, no-cache"}
+        if etag_matches(",".join(request.headers.getlist("if-none-match")), etag):
+            return Response(status_code=304, headers=headers)
+        return Response(content, media_type="application/json", headers=headers)
 
     return app

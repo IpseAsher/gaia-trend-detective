@@ -14,9 +14,12 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["httpx2==2.16.0", "pytest==9.2.0"]
+prepare = ["h5py==3.16.0", "numpy==2.5.5", "shapely==2.2.0"]
+reference = ["scipy==1.17.1", "pymannkendall==1.4.3"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = [".."]
