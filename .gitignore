@@ -54,3 +54,11 @@ Thumbs.db
 /docs/adr/
 /docs/
 /.playwright-mcp
+
+#configuration vscode
+/.vscode
+
+#information
+/data/sources/.imerg-download.lock
+/data/sources/
+/data/links/
