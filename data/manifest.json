@@ -1,0 +1,128 @@
+{
+  "manifest_version": 1,
+  "dataset_id": "gaia-regional-precipitation",
+  "dataset_version": "gaia-imerg-v07b-inegi-mg2024-2001-2024-v1",
+  "schema_version": 1,
+  "prepared_at": "2026-11-16T03:08:28.610052+00:00",
+  "sqlite_file": "gaia.sqlite",
+  "sqlite_sha256": "b445ba62999c8605b0e13780e085c0d5127441448fe3a987a597a8574db6970e",
+  "sqlite_bytes": 1073152,
+  "variable": "precipitation",
+  "unit": "mm",
+  "coverage": {
+    "observation_start": "2000-12",
+    "observation_end": "2024-12",
+    "analysis_start_year": 2001,
+    "analysis_end_year": 2024,
+    "extra_month_for_djf": "2000-12"
+  },
+  "region_count": 2,
+  "monthly_observation_count": 578,
+  "checks": {
+    "integrity_check": "ok",
+    "foreign_key_violations": 0,
+    "regions": 2,
+    "monthly_observations": 578,
+    "unique_monthly_keys": 578,
+    "read_only_write_rejected": true,
+    "reference_tolerance_mm": 1e-10,
+    "references": [
+      {
+        "region_id": "09",
+        "month": "2001-01",
+        "expected_mm": 6.460990708972067,
+        "source_sha256": "68d2f167e83c2c3a2df5386186e615dd42d214649feb5424805a25cf337e3a6b",
+        "hours": 744,
+        "stored_mm": 6.460990708972066,
+        "absolute_error_mm": 8.881784197001252e-16
+      },
+      {
+        "region_id": "15",
+        "month": "2001-01",
+        "expected_mm": 6.3229909370027935,
+        "source_sha256": "68d2f167e83c2c3a2df5386186e615dd42d214649feb5424805a25cf337e3a6b",
+        "hours": 744,
+        "stored_mm": 6.322990937002792,
+        "absolute_error_mm": 1.7763568394002505e-15
+      },
+      {
+        "region_id": "09",
+        "month": "2004-02",
+        "expected_mm": 2.2241061738193544,
+        "source_sha256": "ef4781c0961842d16d08e77f540bc3f4bd49b52a15c20d9ce9e08e23421fc266",
+        "hours": 696,
+        "stored_mm": 2.2241061738193553,
+        "absolute_error_mm": 8.881784197001252e-16
+      },
+      {
+        "region_id": "15",
+        "month": "2004-02",
+        "expected_mm": 1.9768351063158076,
+        "source_sha256": "ef4781c0961842d16d08e77f540bc3f4bd49b52a15c20d9ce9e08e23421fc266",
+        "hours": 696,
+        "stored_mm": 1.9768351063158076,
+        "absolute_error_mm": 0.0
+      }
+    ]
+  },
+  "precipitation_source": {
+    "provider": "NASA GES DISC",
+    "product": "GPM_3IMERGM",
+    "collection_version": "07",
+    "processing_version": "V07B",
+    "doi": "10.5067/GPM/IMERG/3B-MONTH/07",
+    "url": "https://disc.gsfc.nasa.gov/datasets/GPM_3IMERGM_07/summary",
+    "citation": "Huffman, G. J., Stocker, E. F., Bolvin, D. T., Nelkin, E. J., and Tan, J. (2023). GPM IMERG Final Precipitation L3 1 month 0.1 degree x 0.1 degree V07. NASA GES DISC. https://doi.org/10.5067/GPM/IMERG/3B-MONTH/07",
+    "native_variable": "/Grid/precipitation",
+    "native_units": "mm/hr",
+    "output_units": "mm"
+  },
+  "boundary_source": {
+    "retrieved_at_utc": "2026-11-16T00:34:40.482703+00:00",
+    "catalog": "https://www.inegi.org.mx/app/biblioteca/ficha.html?upc=794551132173",
+    "title": "Marco Geoestadístico 2024",
+    "edition": "2024",
+    "catalog_temporal_coverage": "2023-08-31/2024-08-31",
+    "source_url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/geografia/marcogeo/794551132173/mg_2024_integrado.zip",
+    "remote_zip_bytes": 284338384,
+    "downloaded_range_bytes": 12757200,
+    "members": [
+      {
+        "member": "conjunto_de_datos/00ent.cpg",
+        "local_file": "inegi-2024\\00ent.cpg",
+        "bytes": 5,
+        "sha256": "43e620375f123fc61beace0affca5e0d4b11f8ceff371c726bece01a1e4cef4b"
+      },
+      {
+        "member": "conjunto_de_datos/00ent.dbf",
+        "local_file": "inegi-2024\\00ent.dbf",
+        "bytes": 2850,
+        "sha256": "67ef0df52ba27870ecece18e0ea7f789066116f0eb17300d5f74222cc1cf444c"
+      },
+      {
+        "member": "conjunto_de_datos/00ent.prj",
+        "local_file": "inegi-2024\\00ent.prj",
+        "bytes": 464,
+        "sha256": "56d3a0a21655ed2c8dca1ee45ee7495f4420513aa5f7cf12fb702240134290fa"
+      },
+      {
+        "member": "conjunto_de_datos/00ent.shp",
+        "local_file": "inegi-2024\\00ent.shp",
+        "bytes": 16239364,
+        "sha256": "27dfe807d1b5a6b9d4bd9842fe5d8c22ebfbbc08262aa6e0f7b944c2852eedc2"
+      },
+      {
+        "member": "conjunto_de_datos/00ent.shx",
+        "local_file": "inegi-2024\\00ent.shx",
+        "bytes": 356,
+        "sha256": "3ee03fd3a5921d3852d7365f01d895dd4814581abbe8821c256ba59bcc03b377"
+      }
+    ]
+  },
+  "preparation_inputs_sha256": "3462a6c42947be88adfec034e849e527af40cae2406c6251bf0e1399ddbaddd0",
+  "preparation_code_sha256": {
+    "prepare_data.py": "a070b59dc21a5c6530728dc21cd9e204266c2bd7c74f4da799bdbbc8dc36074f",
+    "imerg.py": "e435f89457d3bad61488f70ea65d0fba3ca157f030bc70db0f71a8a05ef22f38",
+    "schema.sql": "f8432992b60821479026f766fca763c2bde8765940cbf77b864c684f01595e64"
+  }
+}
